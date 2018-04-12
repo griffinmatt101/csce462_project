@@ -7,8 +7,8 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk,Gdk
 from gi.repository import GObject
 
-# Wrap window inside GTK application (application.py)
-# Executable is digit-al-tunes file
+# Wrap window inside GTK Application (application.py)
+# Create executable using app.run()
 class Clock(Gtk.Window):
     def __init__(self):
         super(Clock,self).__init__()
