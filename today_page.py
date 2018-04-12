@@ -7,8 +7,6 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk,Gdk
 from gi.repository import GObject
 
-# Wrap window inside GTK Application (application.py)
-# Create executable using app.run()
 class Clock(Gtk.Window):
     def __init__(self):
         super(Clock,self).__init__()
@@ -21,15 +19,22 @@ class Clock(Gtk.Window):
 
         main_box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 40)
 
+        # Clock label
         self.label1 = Gtk.Label()
-        # self.label1.set_xalign(1)
-        # self.label1.set_yalign(0)
+        self.label1.set_xalign(1)
+        self.label1.set_yalign(0)
 
+        # Another label
         self.label2 = Gtk.Label("Label 2")
 
-        # Place everythin else at the end
+        # @params:
+        #   item: what to add to the box
+        #   shouldExpand: expands it across the space
+        #   shouldFill: fills imediate space given
+        #
         main_box.pack_start(self.label1, True, True, 0)
         main_box.pack_end(self.label2, True, True, 0)
+        # Add any new labels by main_box.pack_end(...)
 
         self.add(main_box)
         self.show_all()
