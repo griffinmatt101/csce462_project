@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from tkinter import *
-import tkinter,time,datetime
+import tkinter
+import time
+import datetime
 
 def tick(time_old, clock):
     # get the current local time from the PC
@@ -18,25 +20,21 @@ def tick(time_old, clock):
 
 
 def main():
-    
     root = tkinter.Tk()
     root.geometry('1920x1080')
 
+ #   back = tkinter.Label(root,bg='black')
+ #   back.pack(fill=tkinter.BOTH,expand=1)
+
     #CLOCK
-    clock = tkinter.Label(root,font=('times',45,'bold'),bg='black')
-    clock.pack(anchor=NE,pady=.1)
+    clock = tkinter.Label(root,font=('times',41,'bold'),bg='black')
+    clock.pack(anchor=NE)
     tick("", clock)
 
     #DATE
-    the_date = datetime.date.today().strftime('%A') + ', ' + datetime.date.today().strftime('%B') + " " + datetime.date.today().strftime('%d')
-    input_date = tkinter.Label(root,text=the_date,font=('times',31,'bold'),bg='black')
-    input_date.pack(anchor=NE,pady=.1)
-
-    #WEATHER
-    img = PhotoImage(file='id10.gif')
-    panel = tkinter.Label(root,image=img,bg='black')
-    panel.place(x=0,y=0)
-    
+    the_date = datetime.datetime.now().strftime('%m/%d')
+    input_date = tkinter.Label(root,text=the_date,font=('times',41,'bold'),bg='black')
+    input_date.place(x=0,y=0)
 
     root.mainloop()
 
