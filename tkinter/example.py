@@ -33,9 +33,9 @@ def main():
     input_date.pack(anchor=NE,pady=.1)
 
     #WEATHER
-    img = PhotoImage(file='id10.gif')
-    panel = tkinter.Label(root,image=img,bg='black')
-    panel.place(x=0,y=0)
+#    img = PhotoImage(file='id10.gif')
+#    panel = tkinter.Label(root,image=img,bg='black')
+#    panel.place(x=0,y=0)
     
 
     root.mainloop()
