@@ -1,0 +1,75 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from tkinter import *
+import tkinter
+import time
+import datetime
+import sys
+import events
+
+def tick(time_old, clock):
+    # get the current local time from the PC
+    time_now = time.strftime('%I:%M')
+    # if time string has changed, update it
+    if time_now != time_old:
+        time_old = time_now
+        clock.config(text = time_now)
+    # calls itself every 200 milliseconds
+    # to update the time display as needed
+    # could use >200 ms, but display gets jerky
+    clock.after(200, tick, time_old, clock)
+
+
+def main():
+    root = tkinter.Tk()
+    root.geometry('1920x1080')
+
+ #   back = tkinter.Label(root,bg='black')
+ #   back.pack(fill=tkinter.BOTH,expand=1)
+
+    #CLOCK ###################################################################################
+    clock = tkinter.Label(root,font=('verdana',41,'bold'),bg='black')
+    clock.pack(anchor=NE)
+    tick("", clock)
+    
+    ##########################################################################################
+
+    #DATE ####################################################################################
+    the_date = datetime.datetime.now().strftime('%m/%d')
+    input_date = tkinter.Label(root,text=the_date,font=('verdana',41,'bold'),bg='black')
+    input_date.place(x=0,y=0)
+    
+    ##########################################################################################
+
+    #GOOGLE CALENDAR #########################################################################
+    events.main(sys.argv)
+
+    f = open('event_list.txt','r')
+    line = f.readline()
+    count = 1
+
+    eventarray = []
+
+    while line:
+        eventarray.append(line)
+        line = f.readline()
+        count += 1
+
+    event1 = tkinter.Label(root,text=eventarray[0],font=('verdana',20,'bold'),bg='black')
+    event1.pack(anchor=W)
+
+    event2 = tkinter.Label(root,text=eventarray[1],font=('verdana',20,'bold'),bg='black')
+    event2.pack(anchor=W)
+
+    print(eventarray)
+
+    event3 = tkinter.Label(root,text=eventarray[2],font=('verdana',20,'bold'),bg='black')
+    event3.pack(anchor=W)
+
+     #########################################################################################
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
