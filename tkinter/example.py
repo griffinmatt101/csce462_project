@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#/usr/bin/python
 # -*- coding: utf-8 -*-
 
 from tkinter import *
@@ -21,6 +21,7 @@ def main():
     
     root = tkinter.Tk()
     root.geometry('1920x1080')
+    root.configure(background='black')
 
     #CLOCK
     clock = tkinter.Label(root,font=('times',45,'bold'),bg='black')

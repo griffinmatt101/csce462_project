@@ -22,6 +22,7 @@ def tick(time_old, clock):
 def main():
     root = tkinter.Tk()
     root.geometry('1920x1080')
+    root.configure(background='black')
 
  #   back = tkinter.Label(root,bg='black')
  #   back.pack(fill=tkinter.BOTH,expand=1)
