@@ -1,0 +1,10 @@
+To use python-weather-api, go to:
+https://code.google.com/archive/p/python-weather-api/
+
+and follow download instructions
+
+Must also have tkinter installed
+(Currently running on Python 3.6.4)
+
+
+>python today.py
