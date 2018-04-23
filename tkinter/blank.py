@@ -4,9 +4,6 @@
 from tkinter import *
 import tkinter,time,datetime
 import sys
-#import events
-import feedparser
-from subprocess import check_output
 
 
 def tick(time_old, clock):
@@ -24,10 +21,8 @@ def tick(time_old, clock):
 
 def main():
     root = tkinter.Tk()
-    root.geometry('1920x1080')
+    root.geometry('1050x1680')
     root.configure(background='black')
- #   back = tkinter.Label(root,bg='black')
- #   back.pack(fill=tkinter.BOTH,expand=1)
 
     #CLOCK ###################################################################################
     clock = tkinter.Label(root,font=('verdana',41,'bold'),bg='black')
@@ -41,6 +36,7 @@ def main():
     input_date = tkinter.Label(root,text=the_date,font=('verdana',41,'bold'),bg='black')
     input_date.place(x=0,y=0)
     
+    ##########################################################################################
 
     root.mainloop()
 
