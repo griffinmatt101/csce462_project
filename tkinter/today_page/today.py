@@ -25,7 +25,7 @@ def main():
     root.configure(background='black')
 
     #CLOCK ###################################################################################
-    clock = tkinter.Label(root,font=('verdana',45,'bold'),bg='black')
+    clock = tkinter.Label(root,font=('verdana',45,'bold'),fg='white',bg='black')
     clock.pack(anchor=NE,pady=.1)
     tick("", clock)
 
@@ -33,7 +33,7 @@ def main():
 
     #DATE ####################################################################################
     the_date = datetime.date.today().strftime('%A') + ', ' + datetime.date.today().strftime('%B') + " " + datetime.date.today().strftime('%d')
-    input_date = tkinter.Label(root,text=the_date,font=('verdana',31,'bold'),bg='black')
+    input_date = tkinter.Label(root,text=the_date,font=('verdana',31,'bold'),fg='white',bg='black')
     input_date.pack(anchor=NE,pady=.1)
 
     ##########################################################################################
@@ -51,102 +51,102 @@ def main():
     if('Mostly Cloudy' in noaa_cond):
         if(hour_day): #daytime
             img = PhotoImage(file='cloud_sun.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
         else:
             img = PhotoImage(file='cloud_moon.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
 
     elif('Windy' in noaa_cond):
         if(hour_day):
             img = PhotoImage(file='windy_day.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
         else:
             img = PhotoImage(file='windy_night.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
 
 
     elif('Fair' in noaa_cond or 'Clear' in noaa_cond):
         if(hour_day):
             img = PhotoImage(file='bright_sun.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
             #panel.pack(side=TOP,anchor=W)
         else:
             img = PhotoImage(file='moon.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
 
     elif('A Few Clouds' in noaa_cond):
         if(hour_day):
             img = PhotoImage(file='cloud_sun.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
         else:
             img = PhotoImage(file='cloud_moon.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
 
     elif('Partly Cloudy' in noaa_cond):
         if(hour_day):
             img = PhotoImage(file='cloud_sun.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
         else:
             img = PhotoImage(file='cloud_moon.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
 
     elif('Overcast' in noaa_cond):
         img = PhotoImage(file='cloudy.png')
-        panel = tkinter.Label(root,image=img,bg='black')
+        panel = tkinter.Label(root,image=img,fg='white',bg='black')
         panel.place(x=0,y=0)
 
     elif('Fog' in noaa_cond): 
         img = PhotoImage(file='fog.png')
-        panel = tkinter.Label(root,image=img,bg='black')
+        panel = tkinter.Label(root,image=img,fg='white',bg='black')
         panel.place(x=0,y=0)
 
     elif('Thunderstorm' in noaa_cond):
         if(hour_day):
             img = PhotoImage(file='thunder_sun.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
         else:
             img = PhotoImage(file='thunder_moon.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
 
     elif('Rain' in noaa_cond or 'Drizzle' in noaa_cond):
         if(hour_day):
             img = PhotoImage(file='rain_sun.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
         else:
             img = PhotoImage(file='rain_moon.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
 
     else:
         if(hour_day):
             img = PhotoImage(file='bright_sun.png')
-            panel = tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
         else:
             img = PhotoImage(file='moon.png')
-            panel = Tkinter.Label(root,image=img,bg='black')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
 
 
     noaa_temp = noaa['temp_f']
-    temp_display = tkinter.Label(root,text=noaa_temp + ' F',font=('verdana',30,'bold'),bg='black')
+    temp_display = tkinter.Label(root,text=noaa_temp + ' F - ' + noaa_cond,font=('verdana',30,'bold'),fg='white',bg='black')
     #temp_display.pack(anchor=W)
     temp_display.place(x=0,y=250)
 
-    city_display = tkinter.Label(root,text='College Station, TX',font=('verdana',30,'bold'),bg='black')
+    city_display = tkinter.Label(root,text='College Station, TX',font=('verdana',30,'bold'),fg='white',bg='black')
     city_display.place(x=0,y=325)
 
     ##########################################################################################
