@@ -21,11 +21,12 @@ def tick(time_old, clock):
 def main():
     
     root = tkinter.Tk()
-    root.geometry('1920x1080')
+    root.geometry('1050x1680') 
     root.configure(background='black')
+    root.attributes('-fullscreen',True)
 
     #CLOCK ###################################################################################
-    clock = tkinter.Label(root,font=('verdana',45,'bold'),fg='white',bg='black')
+    clock = tkinter.Label(root,font=('verdana',100,'bold'),fg='white',bg='black')
     clock.pack(anchor=NE,pady=.1)
     tick("", clock)
 
