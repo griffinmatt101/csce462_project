@@ -26,6 +26,7 @@ def main():
     root = tkinter.Tk()
     root.geometry('1050x1680') 
     root.configure(background='black')
+    root.attributes('-fullscreen',True)
 
     #CLOCK ###################################################################################
     clock = tkinter.Label(root,font=('verdana',60,'bold'),fg='white',bg='black')
