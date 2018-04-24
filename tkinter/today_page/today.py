@@ -41,20 +41,21 @@ def main():
 
     #WEATHER #################################################################################
     noaa = pywapi.get_weather_from_noaa('KCLL')
-    noaa_cond = noaa['weather']
+    #noaa_cond = noaa['weather']
 
-#    noaa_cond = 'Rain' #test case
+    noaa_cond = 'Mostly Cloudy' #test case
     print (noaa_cond)
 
     hour = int(datetime.datetime.now().strftime('%H'))
 #    hour = 22 #test case
     hour_day = (hour >= 7 and hour < 20)
-
+    compliment = ""
     if('Mostly Cloudy' in noaa_cond):
         if(hour_day): #daytime
             img = PhotoImage(file='cloud_sun.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
+            compliment = "Be the ray of sunshine today!"
         else:
             img = PhotoImage(file='cloud_moon.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
@@ -162,6 +163,8 @@ def main():
     tomorrow_display = tkinter.Label(root,text=tomorrow, font=('verdana',20,'bold'),fg='white',bg='black')
     tomorrow_display.place(x=0, y=270)
 
+    compliment_label = tkinter.Label(root,text=compliment,font=('DejaVu Serif',50,'italic'),fg='white',bg='black')
+    compliment_label.pack(side=BOTTOM,anchor=S)
     #lookupString.place(x=305,y=240)
     # city_display = tkinter.Label(root,text='College Station, TX',font=('verdana',30,'bold'),fg='white',bg='black')
     # city_display.place(x=0,y=325)

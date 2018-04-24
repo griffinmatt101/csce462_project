@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from tkinter import *
+import tkinter.font
 import tkinter,time,datetime
 import sys
 
@@ -36,8 +37,12 @@ def main():
     the_date = datetime.datetime.now().strftime('%m/%d')
     input_date = tkinter.Label(root,text=the_date,font=('verdana',100,'bold'),fg='white',bg='black')
     input_date.place(x=0,y=0)
+
     
     ##########################################################################################
+
+    compliment = tkinter.Label(root,text="You look beautiful today!",font=('DejaVu Serif',50,'italic'),fg='white',bg='black')
+    compliment.pack(side=BOTTOM,anchor=S)
 
     root.mainloop()
 
