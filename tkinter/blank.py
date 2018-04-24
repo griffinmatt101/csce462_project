@@ -26,7 +26,7 @@ def main():
     root.attributes('-fullscreen',True)
 
     #CLOCK ###################################################################################
-    clock = tkinter.Label(root,font=('verdana',60,'bold'),fg='white',bg='black')
+    clock = tkinter.Label(root,font=('verdana',100,'bold'),fg='white',bg='black')
     clock.pack(anchor=NE)
     tick("", clock)
     
@@ -34,7 +34,7 @@ def main():
 
     #DATE ####################################################################################
     the_date = datetime.datetime.now().strftime('%m/%d')
-    input_date = tkinter.Label(root,text=the_date,font=('verdana',41,'bold'),fg='white',bg='black')
+    input_date = tkinter.Label(root,text=the_date,font=('verdana',100,'bold'),fg='white',bg='black')
     input_date.place(x=0,y=0)
     
     ##########################################################################################
