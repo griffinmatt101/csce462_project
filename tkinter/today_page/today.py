@@ -42,6 +42,7 @@ def main():
     #WEATHER #################################################################################
     noaa = pywapi.get_weather_from_noaa('KCLL')
     noaa_cond = noaa['weather']
+
 #    noaa_cond = 'Rain' #test case
     print (noaa_cond)
 
@@ -72,8 +73,8 @@ def main():
 
     elif('Fair' in noaa_cond or 'Clear' in noaa_cond):
         if(hour_day):
-            img = PhotoImage(file='bright_sun.png').grid(row=0, column=0)
-            panel = tkinter.Label(root,image=img,fg='white',bg='black').grid(row=0, column=1)
+            img = PhotoImage(file='bright_sun.png')
+            panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
             #panel.pack(side=TOP,anchor=W)
         else:
@@ -143,12 +144,21 @@ def main():
 
 
     noaa_temp = noaa['temp_f']
-    temp_display = tkinter.Label(root,text=noaa_temp + ' F - ' + noaa_cond,font=('verdana',30,'bold'),fg='white',bg='black')
+    temp_display = tkinter.Label(root,text=noaa_temp + ' F',font=('verdana',60,'bold'),fg='white',bg='black')
     #temp_display.pack(anchor=W)
-    temp_display.place(x=0,y=250)
+    temp_display.place(x=256,y=50)
 
-    city_display = tkinter.Label(root,text='College Station, TX',font=('verdana',30,'bold'),fg='white',bg='black')
-    city_display.place(x=0,y=325)
+    weather_com = pywapi.get_weather_from_weather_com('77840','imperial')
+    todayData = weather_com['forecasts'][0]
+    temp_high_display = tkinter.Label(root,text=todayData['high'],font=('verdana',40,'bold'),fg='white',bg='black')
+    temp_low_display = tkinter.Label(root,text=todayData['low'],font=('verdana',40,'bold'),fg='white',bg='black')
+    high_low_diff = tkinter.Label(root,text="/",font=('verdana',60,'bold'),fg='white',bg='black')
+    temp_high_display.place(x=305,y=140)
+    temp_low_display.place(x=410,y=160)
+    high_low_diff.place(x=380,y=135)
+
+    # city_display = tkinter.Label(root,text='College Station, TX',font=('verdana',30,'bold'),fg='white',bg='black')
+    # city_display.place(x=0,y=325)
 
     ##########################################################################################
 
