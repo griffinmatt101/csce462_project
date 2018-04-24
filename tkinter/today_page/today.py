@@ -163,7 +163,7 @@ def main():
     tomorrow_display = tkinter.Label(root,text=tomorrow, font=('verdana',20,'bold'),fg='white',bg='black')
     tomorrow_display.place(x=0, y=270)
 
-    compliment_label = tkinter.Label(root,text=compliment,font=('DejaVu Serif',50,'italic bold'),fg='white',bg='black')
+    compliment_label = tkinter.Label(root,text=compliment,font=('DejaVu Serif',40,'italic bold'),fg='white',bg='black')
     compliment_label.pack(side=BOTTOM,anchor=S)
     #lookupString.place(x=305,y=240)
     # city_display = tkinter.Label(root,text='College Station, TX',font=('verdana',30,'bold'),fg='white',bg='black')
