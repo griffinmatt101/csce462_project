@@ -149,14 +149,20 @@ def main():
     temp_display.place(x=256,y=50)
 
     weather_com = pywapi.get_weather_from_weather_com('77840','imperial')
-    todayData = weather_com['forecasts'][0]
-    temp_high_display = tkinter.Label(root,text=todayData['high'],font=('verdana',40,'bold'),fg='white',bg='black')
-    temp_low_display = tkinter.Label(root,text=todayData['low'],font=('verdana',40,'bold'),fg='white',bg='black')
+    today_data = weather_com['forecasts'][0]
+    temp_high_display = tkinter.Label(root,text=today_data['high'],font=('verdana',40,'bold'),fg='white',bg='black')
+    temp_low_display = tkinter.Label(root,text=today_data['low'],font=('verdana',40,'bold'),fg='white',bg='black')
     high_low_diff = tkinter.Label(root,text="/",font=('verdana',60,'bold'),fg='white',bg='black')
     temp_high_display.place(x=305,y=140)
     temp_low_display.place(x=410,y=160)
     high_low_diff.place(x=380,y=135)
 
+    tomorrow_data = weather_com['forecasts'][1]
+    tomorrow = "Tomorrow: " + tomorrow_data['day']['text'] + " & a high of " + tomorrow_data['high'] + " degrees"
+    tomorrow_display = tkinter.Label(root,text=tomorrow, font=('verdana',20,'bold'),fg='white',bg='black')
+    tomorrow_display.place(x=0, y = 270)
+
+    #lookupString.place(x=305,y=240)
     # city_display = tkinter.Label(root,text='College Station, TX',font=('verdana',30,'bold'),fg='white',bg='black')
     # city_display.place(x=0,y=325)
 
