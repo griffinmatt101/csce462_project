@@ -29,7 +29,7 @@ def main():
     root.attributes('-fullscreen',True)
 
     #CLOCK ###################################################################################
-    clock = tkinter.Label(root,font=('verdana',60,'bold'),fg='white',bg='black')
+    clock = tkinter.Label(root,font=('verdana',100,'bold'),fg='white',bg='black')
     clock.pack(anchor=NE)
     tick("", clock)
     
@@ -37,18 +37,20 @@ def main():
 
     #DATE ####################################################################################
     the_date = datetime.datetime.now().strftime('%m/%d')
-    input_date = tkinter.Label(root,text=the_date,font=('verdana',41,'bold'),fg='white',bg='black')
+    input_date = tkinter.Label(root,text=the_date,font=('verdana',100,'bold'),fg='white',bg='black')
     input_date.place(x=0,y=0)
     
     ##########################################################################################
 
     #NEWS ####################################################################################
-    d = feedparser.parse('https://news.google.com/news/rss/?ned=us&gl=US&hl=en')
+    d = feedparser.parse('http://news.google.com/news?ned=us&output=rss')
 
-    count = 1
-    for post in d.entries[0:4]:
-        #print(post.title + "\n")
-        headline = tkinter.Label(root,text=post.title + '\n',font=('verdana',17,'bold'),fg='white',bg='black')
+    
+    for post in d.entries[1:5]:
+        word = post.title
+        source = word.split(" - ")
+        wordlen = len(source)-1
+        headline = tkinter.Label(root,text=word[:30] + "... - " + source[wordlen] +  '\n',font=('verdana',17,'bold'),fg='white',bg='black')
                 
         headline.pack(side=TOP,anchor=W)
 
