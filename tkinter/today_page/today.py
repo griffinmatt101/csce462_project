@@ -43,7 +43,7 @@ def main():
     noaa = pywapi.get_weather_from_noaa('KCLL')
     #noaa_cond = noaa['weather']
 
-    noaa_cond = 'Mostly Cloudy' #test case
+    noaa_cond = 'Thunderstorm' #test case
     print (noaa_cond)
 
     hour = int(datetime.datetime.now().strftime('%H'))
@@ -66,10 +66,12 @@ def main():
             img = PhotoImage(file='windy_day.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
+            compliment = "You blow me away!"
         else:
             img = PhotoImage(file='windy_night.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
+            compliment = "You blow me away!"
 
 
     elif('Fair' in noaa_cond or 'Clear' in noaa_cond):
@@ -77,17 +79,19 @@ def main():
             img = PhotoImage(file='bright_sun.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
-            #panel.pack(side=TOP,anchor=W)
+            compliment = "You shine brighter than the sun!"
         else:
             img = PhotoImage(file='moon.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
+            compliment = "You shine brighter than the moon!"
 
     elif('A Few Clouds' in noaa_cond):
         if(hour_day):
             img = PhotoImage(file='cloud_sun.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
+            compliment = "Be the ray of sunshine today!"
         else:
             img = PhotoImage(file='cloud_moon.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
@@ -98,6 +102,7 @@ def main():
             img = PhotoImage(file='cloud_sun.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
+            compliment = "Be the ray of sunshine today!"
         else:
             img = PhotoImage(file='cloud_moon.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
@@ -107,6 +112,7 @@ def main():
         img = PhotoImage(file='cloudy.png')
         panel = tkinter.Label(root,image=img,fg='white',bg='black')
         panel.place(x=0,y=0)
+        compliment = "You are sunshine on a cloudy day!"
 
     elif('Fog' in noaa_cond): 
         img = PhotoImage(file='fog.png')
@@ -118,20 +124,24 @@ def main():
             img = PhotoImage(file='thunder_sun.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
+            compliment = "Your smile is striking!"
         else:
             img = PhotoImage(file='thunder_moon.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
+            compliment = "Your smile is striking!"
 
     elif('Rain' in noaa_cond or 'Drizzle' in noaa_cond):
         if(hour_day):
             img = PhotoImage(file='rain_sun.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
+            compliment = "Fo' dizzle, you looking good today!"
         else:
             img = PhotoImage(file='rain_moon.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
+
 
     else:
         if(hour_day):
