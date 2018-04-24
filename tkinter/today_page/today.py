@@ -35,7 +35,7 @@ def main():
     #DATE ####################################################################################
     the_date = datetime.date.today().strftime('%A') + ', ' + datetime.date.today().strftime('%B') + " " + datetime.date.today().strftime('%d')
     input_date = tkinter.Label(root,text=the_date,font=('verdana',31,'bold'),fg='white',bg='black')
-    input_date.pack(anchor=NE,pady=.1)
+    input_date.pack(anchor=NE,pady=.5)
 
     ##########################################################################################
 
@@ -72,8 +72,8 @@ def main():
 
     elif('Fair' in noaa_cond or 'Clear' in noaa_cond):
         if(hour_day):
-            img = PhotoImage(file='bright_sun.png')
-            panel = tkinter.Label(root,image=img,fg='white',bg='black')
+            img = PhotoImage(file='bright_sun.png').grid(row=0, column=0)
+            panel = tkinter.Label(root,image=img,fg='white',bg='black').grid(row=0, column=1)
             panel.place(x=0,y=0)
             #panel.pack(side=TOP,anchor=W)
         else:
