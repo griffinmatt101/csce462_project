@@ -41,6 +41,7 @@ def main():
     
     ##########################################################################################
 
+    comliments = ['You look beautiful today!','You light up every room!','']
     compliment = tkinter.Label(root,text="You look beautiful today!",font=('DejaVu Serif',50,'italic'),fg='white',bg='black')
     compliment.pack(side=BOTTOM,anchor=S)
 
@@ -48,3 +49,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# You look beautiful today!
+# You light up the room
+#    

@@ -4,6 +4,7 @@
 from tkinter import *
 import tkinter,time,datetime
 import pywapi
+import random
 
 def tick(time_old, clock):
     # get the current local time from the PC
@@ -43,13 +44,14 @@ def main():
     noaa = pywapi.get_weather_from_noaa('KCLL')
     #noaa_cond = noaa['weather']
 
-    noaa_cond = 'Windy' #test case
+    noaa_cond = 'Fog' #test case
     print (noaa_cond)
 
     hour = int(datetime.datetime.now().strftime('%H'))
 #    hour = 22 #test case
     hour_day = (hour >= 7 and hour < 20)
     compliment_size = 40
+    compliment_array = [('You look beautiful today!',60), ('You light up every room!',60),('You are a force of nature!',60), ("Lookin' good as always!", 60),("No one can do this better than you!",40)]
     compliment = ""
     if('Mostly Cloudy' in noaa_cond):
         if(hour_day): #daytime
@@ -150,6 +152,7 @@ def main():
             img = PhotoImage(file='rain_moon.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
+            compliment = "Fo' drizzle, you looking good today!"
 
 
     else:
@@ -181,6 +184,12 @@ def main():
     tomorrow = "Tomorrow: " + tomorrow_data['day']['text'] + ". High of " + tomorrow_data['high'] + " F"
     tomorrow_display = tkinter.Label(root,text=tomorrow, font=('verdana',20,'bold'),fg='white',bg='black')
     tomorrow_display.place(x=0, y=270)
+
+    if(compliment == ""):
+        random_compliment = random.randint(0,4)
+        compliment = compliment_array[random_compliment][0]
+        compliment_size = compliment_array[random_compliment][1]
+
 
     compliment_label = tkinter.Label(root,text=compliment,font=('DejaVu Serif',compliment_size,'italic bold'),fg='white',bg='black')
     compliment_label.pack(side=BOTTOM,anchor=S)
