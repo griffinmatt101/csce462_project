@@ -51,7 +51,7 @@ def main():
 #    hour = 22 #test case
     hour_day = (hour >= 7 and hour < 20)
     compliment_size = 40
-    compliment_array = [('You look beautiful today!',50), ('You light up every room!',50),('You are a force of nature!',50), ("Lookin' good as always!", 50),("No one can do this better than you!",35)]
+    compliment_array = [('You look beautiful today!',50), ('You light up every room!',50),('You are a force of nature!',50), ("Lookin' good as always!", 50),("No one can do this better than you!",35),("#flawless",70)]
     compliment = ""
     if('Mostly Cloudy' in noaa_cond):
         if(hour_day): #daytime
@@ -82,7 +82,7 @@ def main():
             img = PhotoImage(file='bright_sun.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
             panel.place(x=0,y=0)
-            compliment = "You shine brighter than the sun!"
+            #compliment = "You shine brighter than the sun!"
         else:
             img = PhotoImage(file='moon.png')
             panel = tkinter.Label(root,image=img,fg='white',bg='black')
