@@ -50,7 +50,12 @@ def main():
         word = post.title
         source = word.split(" - ")
         wordlen = len(source)-1
-        headline = tkinter.Label(root,text=word[:30] + "... - " + source[wordlen] +  '\n',font=('verdana',17,'bold'),fg='white',bg='black')
+        news_headline = source[0]
+        print(len(news_headline))
+        if(len(news_headline)-1 >= 77):
+            news_headline = news_headline[:77] + "..."
+            
+        headline = tkinter.Label(root,text=news_headline[:80] + " - " + source[1] +  '\n',font=('verdana',15),fg='white',bg='black')
                 
         headline.pack(side=TOP,anchor=W)
 
