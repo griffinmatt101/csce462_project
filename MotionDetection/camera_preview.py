@@ -34,7 +34,6 @@ frame1 = blurFrame1
 
 rgbFrame.truncate(0)
 
-#for i in range(1, 101):
 while True:
     time.sleep(0.01)
 
