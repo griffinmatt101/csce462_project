@@ -2,9 +2,41 @@
 # -*- coding: utf-8 -*-
 
 from tkinter import *
+import tkinter.font
 import tkinter,time,datetime
 import pywapi
 import random
+import sys
+
+#Libraries
+import RPi.GPIO as GPIO
+import time
+ 
+#GPIO Mode (BOARD / BCM)
+GPIO.setmode(GPIO.BCM)
+ 
+#set GPIO Pins
+LED_ON = 18
+MAT = 19
+
+GPIO.setup(MAT, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(LED_ON, GPIO.OUT)
+
+def pressed(channel):
+	
+	print("here")
+	print(not GPIO.input(MAT))
+	if(GPIO.input(MAT) == 0):
+		today()
+	else:
+		root.quit()
+	GPIO.output(LED_ON, not GPIO.input(MAT))
+
+
+
+GPIO.add_event_detect(MAT, GPIO.BOTH, pressed)
+
+
 
 
 def tick(time_old, clock):
@@ -20,7 +52,7 @@ def tick(time_old, clock):
     clock.after(200, tick, time_old, clock)
 
 
-def main():
+def today():
     
     root = tkinter.Tk()
     root.geometry('1050x1680') 
@@ -199,9 +231,40 @@ def main():
     # city_display.place(x=0,y=325)
 
     ##########################################################################################
-
+    
     root.mainloop()
 
-if __name__ == "__main__":
-    main()
+    while(1):
+        global MAT
+        #print("YO")
+        if(GPIO.input(MAT) == 1):
+            root.quit()
+            print("y")
+
+def blank():
+    print("here??")
+    root = tkinter.Tk()
+    root.geometry('1050x1680') 
+    root.configure(background='black')
+    root.attributes('-fullscreen',True)
+
+    #CLOCK ###################################################################################
+    clock = tkinter.Label(root,font=('verdana',100,'bold'),fg='white',bg='black')
+    clock.pack(anchor=NE)
+    tick("", clock)
+    
+    ##########################################################################################
+
+    #DATE ####################################################################################
+    the_date = datetime.datetime.now().strftime('%m/%d')
+    input_date = tkinter.Label(root,text=the_date,font=('verdana',100,'bold'),fg='white',bg='black')
+    input_date.place(x=0,y=0)
+
+    
+    ##########################################################################################
+    
+    
+
+while(True):
+	i=1
 
