@@ -7,7 +7,7 @@ DEBUG = 1
 
 #read SPI data from MCP3008 chip, 8 possible adc's (0-7)
 def read_adc(adcnum, clockpin, mosipin, misopin, cspin):
-	if ((adcnu m >7) or (adcnum < 0)): 
+	if ((adcnum >7) or (adcnum < 0)): 
 		return -1
 	GPIO.output(cspin, True)
 	GPIO.output(clockpin, False)
@@ -18,7 +18,7 @@ def read_adc(adcnum, clockpin, mosipin, misopin, cspin):
 	commandout <<= 3 	#only need to send 5 bits
 	for i in range(5):
 		if (commandout & 0x80):
-			GPIO.ouput(mosipin,  True)
+			GPIO.output(mosipin,  True)
 		else:
 			GPIO.output(mosipin, False)
 		commandout <<= 1
@@ -30,12 +30,12 @@ def read_adc(adcnum, clockpin, mosipin, misopin, cspin):
 	for i in range(12):
 		GPIO.output(clockpin, True)
 		GPIO.output(clockpin, False)
-		adc <<= 1
+		adcout <<= 1
 		if (GPIO.input(misopin)):
 			adcout |= 0x1
 
 	GPIO.output(cspin, True)
-	adc >>= 1
+	adcout >>= 1
 	return adcout
 
 #Port Numbers
