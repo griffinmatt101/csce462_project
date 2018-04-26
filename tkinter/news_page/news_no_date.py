@@ -39,6 +39,7 @@ def main():
     #NEWS ####################################################################################
     d = feedparser.parse('http://news.google.com/news?ned=us&output=rss')
 
+   
     
     i=0
     for post in d.entries[1:6]:

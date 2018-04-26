@@ -30,7 +30,7 @@ def main():
     root.attributes('-fullscreen',True)
 
     #CLOCK ###################################################################################
-    clock = tkinter.Label(root,font=('verdana',100,'bold'),bg='black')
+    clock = tkinter.Label(root,font=('verdana',100,'bold'),fg="white",bg='black')
     clock.pack(anchor=NE)
     tick("", clock)
     
@@ -38,7 +38,7 @@ def main():
 
     #DATE ####################################################################################
     the_date = datetime.datetime.now().strftime('%m/%d')
-    input_date = tkinter.Label(root,text=the_date,font=('verdana',100,'bold'),bg='black')
+    input_date = tkinter.Label(root,text=the_date,font=('verdana',100,'bold'),fg="white",bg='black')
     input_date.place(x=0,y=0)
     
     ##########################################################################################
@@ -53,11 +53,24 @@ def main():
     d = feedparser.parse('http://news.google.com/news?ned=us&output=rss')
 
     count = 1
-    for post in d.entries[1:5]:
-        print(post.title + "\n")
-        headline = tkinter.Label(root,text=post.title + '\n',font=('verdana',17,'bold'),bg='black')
-                
+    i = 1
+    for post in d.entries[1:6]:
+        word = post.title
+        source = word.split(" - ")
+        wordlen = len(source)-1
+        news_headline = source[0]
+        news_source = source[1]
+        if((len(news_headline)-1 + len(news_source)) >= 75):
+            subtract = len(source[1]) + 3
+            news_headline = news_headline[:75-subtract] + "..."
+        headline = tkinter.Label(root,text= str(i) + ". "+ news_headline + " - " + source[1] +  '\n',font=('verdana',14),fg='white',bg='black')
         headline.pack(side=TOP,anchor=W)
+            
+        i = i + 1
+#print(post.title + "\n")
+ #       headline = tkinter.Label(root,text=post.title + '\n',font=('verdana',17,'bold'),fg="white",bg='black')
+                
+  #      headline.pack(side=TOP,anchor=W)
 
     
     
