@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from tkinter import *
-import tkinter.font
-import tkinter,time,datetime
+from Tkinter import *
+#import Tkinter.font
+import Tkinter,time,datetime
 import sys
 
 
@@ -21,13 +21,13 @@ def tick(time_old, clock):
 
 
 def main():
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     root.geometry('1050x1680') 
     root.configure(background='black')
     root.attributes('-fullscreen',True)
 
     #CLOCK ###################################################################################
-    clock = tkinter.Label(root,font=('verdana',100,'bold'),fg='white',bg='black')
+    clock = Tkinter.Label(root,font=('verdana',100,'bold'),fg='white',bg='black')
     clock.pack(anchor=NE)
     tick("", clock)
     
@@ -35,15 +35,11 @@ def main():
 
     #DATE ####################################################################################
     the_date = datetime.datetime.now().strftime('%m/%d')
-    input_date = tkinter.Label(root,text=the_date,font=('verdana',100,'bold'),fg='white',bg='black')
+    input_date = Tkinter.Label(root,text=the_date,font=('verdana',100,'bold'),fg='white',bg='black')
     input_date.place(x=0,y=0)
 
     
     ##########################################################################################
-
-    comliments = ['You look beautiful today!','You light up every room!','']
-    compliment = tkinter.Label(root,text="You look beautiful today!",font=('DejaVu Serif',50,'italic'),fg='white',bg='black')
-    compliment.pack(side=BOTTOM,anchor=S)
 
     root.mainloop()
 
@@ -51,6 +47,4 @@ if __name__ == "__main__":
     main()
 
 
-# You look beautiful today!
-# You light up the room
-#    
+    
