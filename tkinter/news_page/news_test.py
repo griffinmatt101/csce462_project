@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from tkinter import *
+from Tkinter import *
 from PIL import Image, ImageTk
-import tkinter,time,datetime
+import Tkinter,time,datetime
 import sys
 #import events
 import feedparser
@@ -24,13 +24,13 @@ def tick(time_old, clock):
 
 
 def main():
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     root.geometry('1920x1080')
     root.configure(background='black')
     root.attributes('-fullscreen',True)
 
     #CLOCK ###################################################################################
-    clock = tkinter.Label(root,font=('verdana',100,'bold'),fg="white",bg='black')
+    clock = Tkinter.Label(root,font=('verdana',100,'bold'),fg="white",bg='black')
     clock.pack(anchor=NE)
     tick("", clock)
     
@@ -38,14 +38,14 @@ def main():
 
     #DATE ####################################################################################
     the_date = datetime.datetime.now().strftime('%m/%d')
-    input_date = tkinter.Label(root,text=the_date,font=('verdana',100,'bold'),fg="white",bg='black')
+    input_date = Tkinter.Label(root,text=the_date,font=('verdana',100,'bold'),fg="white",bg='black')
     input_date.place(x=0,y=0)
     
     ##########################################################################################
 
     #NEWS ####################################################################################
     img = ImageTk.PhotoImage(Image.open('news.png'))
-    image = tkinter.Label(root,image=img,bg='black')
+    image = Tkinter.Label(root,image=img,bg='black')
     image.pack(anchor=N,side=RIGHT)
 
 
@@ -63,7 +63,7 @@ def main():
         if((len(news_headline)-1 + len(news_source)) >= 75):
             subtract = len(source[1]) + 3
             news_headline = news_headline[:75-subtract] + "..."
-        headline = tkinter.Label(root,text= str(i) + ". "+ news_headline + " - " + source[1] +  '\n',font=('verdana',14),fg='white',bg='black')
+        headline = Tkinter.Label(root,text= str(i) + ". "+ news_headline + " - " + source[1] +  '\n',font=('verdana',14),fg='white',bg='black')
         headline.pack(side=TOP,anchor=W)
             
         i = i + 1
