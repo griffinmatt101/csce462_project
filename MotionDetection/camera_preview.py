@@ -34,7 +34,7 @@ frame1 = blurFrame1
 
 rgbFrame.truncate(0)
 
-while True:
+def detectMotion():
     time.sleep(0.01)
 
     # Capture frame

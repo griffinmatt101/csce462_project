@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from tkinter import *
-import tkinter
+from Tkinter import *
+import Tkinter
 import time
 import datetime
 
@@ -20,7 +20,7 @@ def tick(time_old, clock):
 
 
 def main():
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     root.geometry('1920x1080')
     root.configure(background='black')
 
@@ -28,13 +28,13 @@ def main():
  #   back.pack(fill=tkinter.BOTH,expand=1)
 
     #CLOCK
-    clock = tkinter.Label(root,font=('times',41,'bold'),bg='black')
+    clock = Tkinter.Label(root,font=('times',41,'bold'),bg='black')
     clock.pack(anchor=NE)
     tick("", clock)
 
     #DATE
     the_date = datetime.datetime.now().strftime('%m/%d')
-    input_date = tkinter.Label(root,text=the_date,font=('times',41,'bold'),bg='black')
+    input_date = Tkinter.Label(root,text=the_date,font=('times',41,'bold'),bg='black')
     input_date.place(x=0,y=0)
 
     root.mainloop()
