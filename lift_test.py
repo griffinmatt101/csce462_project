@@ -2,15 +2,14 @@ import Tkinter as tk
 from Tkinter import *
 from PIL import Image, ImageTk
 import Tkinter,time,datetime
-import sys
+import sys, random, pywapi
 import events
 import feedparser
-import time
-import sys
 from subprocess import check_output
-from DetectMotion import DetectMotion
+
 
 #img = ImageTk.PhotoImage(Image.open('calendar_image.png'))
+
 
 class Page(tk.Frame):
     def __init__(self, *args, **kwargs):
@@ -32,36 +31,191 @@ class Page(tk.Frame):
 
     def date(self):
         the_date = datetime.datetime.now().strftime('%m/%d')
-        input_date = Tkinter.Label(self,text=the_date,font=('verdana',100,'bold'),fg="white",bg='black')
+        input_date = Tkinter.Label(self,text=the_date,font=('verdana',100,'bold'),bg='black')
         input_date.place(x=0,y=0)
 
-        clock = Tkinter.Label(self,font=('verdana',100,'bold'),fg="white",bg='black')
+        clock = Tkinter.Label(self,font=('verdana',100,'bold'),bg='black')
         clock.pack(anchor=NE)
         self.tick("", clock)
+
+    def today_date(self):
+        the_date = datetime.date.today().strftime('%A') + ', ' + datetime.date.today().strftime('%B') + " " + datetime.date.today().strftime('%d')
+        input_date = Tkinter.Label(self,text=the_date,font=('verdana',31,'bold'),fg='white',bg='black')
+        input_date.pack(anchor=NE,pady=.5)
+
+        clock = Tkinter.Label(self,font=('verdana',100,'bold'),fg='white',bg='black')
+        clock.pack(anchor=NE,pady=.1)
+        self.tick("", clock)
+
     
 
-class Page1(Page):
+class TodayPage1(Page):
     def __init__(self, *args, **kwargs):
         Page.__init__(self, *args, **kwargs)
-        self.date()
-        self.news()
+        self.today_date()
+        self.today()
+        
+    def today(self):
+        noaa = pywapi.get_weather_from_noaa('KCLL')
+        noaa_cond = noaa['weather']
 
-    def news(self):
-        # img = ImageTk.PhotoImage(Image.open('news.png'))
-        # image = tkinter.Label(self,image=img,bg='black')
-        # image.pack(anchor=N,side=RIGHT)
+        #noaa_cond = 'Thunderstorms' #test case
+        print (noaa_cond)
+
+        hour = int(datetime.datetime.now().strftime('%H'))
+    #    hour = 22 #test case
+        hour_day = (hour >= 7 and hour < 20)
+        compliment_size = 40
+        compliment_array = [('You look beautiful today!',50), ('You light up every room!',50),('You are a force of nature!',50), ("Lookin' good as always!", 50),("No one can do this better than you!",35),("#flawless",70)]
+        compliment = ""
+        if('Mostly Cloudy' in noaa_cond):
+            if(hour_day): #daytime
+                img = PhotoImage(file='cloud_sun.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.image = img
+                panel.place(x=0,y=0)
+                compliment = "Be the ray of sunshine today!"
+            else:
+                img = PhotoImage(file='cloud_moon.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
+
+        elif('Windy' in noaa_cond):
+            compliment = "You blow me away!"
+            compliment_size = 60
+            if(hour_day):
+                img = PhotoImage(file='windy_day.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
+            else:
+                img = PhotoImage(file='windy_night.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
 
 
-#    d = feedparser.parse('https://news.google.com/news/rss/?ned=us&gl=US&hl=en')
-        d = feedparser.parse('http://news.google.com/news?ned=us&output=rss')
+        elif('Fair' in noaa_cond or 'Clear' in noaa_cond):
+            if(hour_day):
+                img = PhotoImage(file='bright_sun.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.image = img
+                panel.place(x=0,y=0)
+                #compliment = "You shine brighter than the sun!"
+            else:
+                img = PhotoImage(file='moon.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
+                compliment = "You shine brighter than the moon!"
 
-        for post in d.entries[1:5]:
-            print(post.title + "\n")
-            headline = Tkinter.Label(self,text=post.title + '\n',font=('verdana',17,'bold'),fg="white",bg='black')
+        elif('A Few Clouds' in noaa_cond):
+            if(hour_day):
+                img = PhotoImage(file='cloud_sun.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
+                compliment = "Be the ray of sunshine today!"
+            else:
+                img = PhotoImage(file='cloud_moon.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
 
-            headline.pack(side=TOP,anchor=W)
+        elif('Partly Cloudy' in noaa_cond):
+            if(hour_day):
+                img = PhotoImage(file='cloud_sun.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
+                compliment = "Be the ray of sunshine today!"
+            else:
+                img = PhotoImage(file='cloud_moon.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
 
-class Page2(Page):
+        elif('Overcast' in noaa_cond):
+            img = PhotoImage(file='cloudy.png')
+            panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+            panel.place(x=0,y=0)
+            compliment = "You are sunshine on a cloudy day!"
+
+        elif('Fog' in noaa_cond): 
+            img = PhotoImage(file='fog.png')
+            panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+            panel.place(x=0,y=0)
+
+        elif('Thunderstorm' in noaa_cond):
+            compliment = "Your smile is striking!"
+            compliment_size = 60
+            if(hour_day):
+                img = PhotoImage(file='thunder_sun.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
+            else:
+                img = PhotoImage(file='thunder_moon.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
+                
+
+        elif('Rain' in noaa_cond or 'Drizzle' in noaa_cond):
+            if(hour_day):
+                img = PhotoImage(file='rain_sun.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
+                compliment = "Fo' drizzle, you looking good today!"
+                compliment_size = 35
+            else:
+                img = PhotoImage(file='rain_moon.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
+                compliment = "Fo' drizzle, you looking good today!"
+                compliment_size = 35
+
+
+        else:
+            if(hour_day):
+                img = PhotoImage(file='bright_sun.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
+            else:
+                img = PhotoImage(file='moon.png')
+                panel = Tkinter.Label(self,image=img,fg='white',bg='black')
+                panel.place(x=0,y=0)
+
+
+        noaa_temp = noaa['temp_f']
+        temp_display = Tkinter.Label(self,text=noaa_temp + ' F',font=('verdana',60,'bold'),fg='white',bg='black')
+        #temp_display.pack(anchor=W)
+        temp_display.place(x=256,y=15)
+
+        
+
+        weather_com = pywapi.get_weather_from_weather_com('77840','imperial')
+        today_data = weather_com['forecasts'][0]
+        temp_high_display = Tkinter.Label(self,text=today_data['high'],font=('verdana',40,'bold'),fg='white',bg='black')
+        temp_low_display = Tkinter.Label(self,text=today_data['low'],font=('verdana',40,'bold'),fg='white',bg='black')
+        high_low_diff = Tkinter.Label(self,text="/",font=('verdana',60,'bold'),fg='white',bg='black')
+        temp_high_display.place(x=305,y=135)
+        temp_low_display.place(x=410,y=155)
+        high_low_diff.place(x=380,y=130)
+        
+        today_condition_display = Tkinter.Label(self, text="Today: " + noaa_cond, font=('veranda',20,'bold'), fg='white', bg='black')
+        today_condition_display.place(x=0, y=255)
+
+        tomorrow_data = weather_com['forecasts'][1]
+        tomorrow = "Tomorrow: " + tomorrow_data['day']['text'] + ". High of " + tomorrow_data['high'] + " F"
+        tomorrow_display = Tkinter.Label(self,text=tomorrow, font=('verdana',20,'bold'),fg='white',bg='black')
+        tomorrow_display.place(x=0, y=290)
+
+        if(compliment == ""):
+            random_compliment = random.randint(0,4)
+            compliment = compliment_array[random_compliment][0]
+            compliment_size = compliment_array[random_compliment][1]
+
+
+        compliment_label = Tkinter.Label(self,text=compliment,font=('DejaVu Serif',compliment_size,'italic bold'),fg='white',bg='black')
+        compliment_label.pack(side=BOTTOM, anchor=S, pady=30)
+        #lookupString.place(x=305,y=240)
+        # city_display = Tkinter.Label(self,text='College Station, TX',font=('verdana',30,'bold'),fg='white',bg='black')
+        # city_display.place(x=0,y=325)
+        
+
+class CalPage2(Page):
     def __init__(self, *args, **kwargs):
         Page.__init__(self, *args, **kwargs)
         self.date()
@@ -69,8 +223,10 @@ class Page2(Page):
 
     def cal(self):
         img = ImageTk.PhotoImage(Image.open('calendar_image.png'))
-        image = Tkinter.Label(self,image=img,fg="white",bg='black')
-        image.pack(anchor=N,side=RIGHT)
+        cal_image = Tkinter.Label(self,image=img,bg='black')
+        cal_image.image = img
+        cal_image.pack(anchor=N,side=RIGHT)
+
 
         events.main(sys.argv)
 
@@ -140,35 +296,54 @@ class Page2(Page):
             event3 = Tkinter.Label(self,text=eventarray,font=('verdana',20,'bold'),fg='white',bg='black')
             event3.pack(anchor=W)
 
-class Page3(Page):
-   def __init__(self, *args, **kwargs):
-       Page.__init__(self, *args, **kwargs)
-       self.date()
-       #label = tk.Label(self, text="This is page 3")
-       #label.pack(side="top", fill="both", expand=True)
+class NewsPage3(Page):
+    def __init__(self, *args, **kwargs):
+        Page.__init__(self, *args, **kwargs)
+        self.date()
+        self.news()
+
+    def news(self):
+        img = ImageTk.PhotoImage(Image.open('news.png'))
+        news_image = Tkinter.Label(self,image=img,bg='black')
+        news_image.image = img
+        news_image.pack(anchor=N,side=RIGHT)
+
+
+#    d = feedparser.parse('https://news.google.com/news/rss/?ned=us&gl=US&hl=en')
+        d = feedparser.parse('http://news.google.com/news?ned=us&output=rss')
+
+        for post in d.entries[1:5]:
+            print(post.title + "\n")
+            headline = Tkinter.Label(self,text=post.title + '\n',font=('verdana',17,'bold'),bg='black')
+
+            headline.pack(side=TOP,anchor=W)
+
+class BlankPage4(Page):
+    def __init__(self,*args,**kwargs):
+        Page.__init__(self,*args,**kwargs)
+        self.date()
+
 
 if __name__ == "__main__":
     root = tk.Tk()
-    # main = MainView(root)
-    # main.pack(side="top", fill="both", expand=True)
-    root.wm_geometry("1920x1080")
     root.configure(background='black')
     root.attributes('-fullscreen',True)
 
-    detectGesture = DetectMotion()
-
-    p1 = Page1(root,bg='black')
-    p2 = Page2(root,bg='black')
-    p3 = Page3(root,bg='black')
+    p1 = TodayPage1(root,bg='black')
+    p2 = CalPage2(root,bg='black')
+    p3 = NewsPage3(root,bg='black')
+    p4 = BlankPage4(root,bg='black')
 
     p1.place(x=0, y=0, relwidth=1, relheight=1)
     p2.place(x=0, y=0, relwidth=1, relheight=1)
     p3.place(x=0, y=0, relwidth=1, relheight=1)
+    p4.place(x=0, y=0, relwidth=1, relheight=1)
 
     pages = []
     pages.append(p1)
     pages.append(p2)
     pages.append(p3)
+    pages.append(p4)
     currentPage = 0
 
     pages[currentPage].show()
@@ -179,10 +354,10 @@ if __name__ == "__main__":
         gesture = detectGesture.detectMotion()
         if gesture=="left":
             print"left"
-            currentPage = (currentPage - 1) % 3
+            currentPage = (currentPage - 1) % 4
         elif gesture=="right":
             print "right"
-            currentPage = (currentPage + 1) % 3
+            currentPage = (currentPage + 1) % 4
         else:
             pass
         pages[currentPage].show()
